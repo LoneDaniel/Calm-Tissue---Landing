@@ -28,7 +28,8 @@ const tabGroups = {
   company: ['.statement', '.homecoming'],
   manufacturing: ['.manufacturing'],
   products: ['.products'],
-  impact: ['.region', '.endorsements', '.sectors', '.vision']
+  impact: ['.region', '.endorsements', '.sectors', '.vision'],
+  contact: ['.contact']
 };
 
 const tabButtons = [...document.querySelectorAll('[data-tab]')];
@@ -65,6 +66,7 @@ function tabForHash(hash) {
   if (id === 'manufacturing') return 'manufacturing';
   if (id === 'products') return 'products';
   if (['impact', 'endorsement-title'].includes(id)) return 'impact';
+  if (id === 'contact') return 'contact';
   return null;
 }
 
