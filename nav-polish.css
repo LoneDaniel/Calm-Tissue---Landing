@@ -1,0 +1,133 @@
+.nav {
+  position: fixed;
+  z-index: 100;
+  background: linear-gradient(180deg, rgba(3, 18, 29, .84), rgba(3, 18, 29, .4));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.nav nav { gap: 28px; }
+
+.top-tabs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 999px;
+  background: rgba(7, 27, 43, .26);
+}
+
+.top-tabs button {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #dbe6eb;
+  padding: 10px 15px;
+  font: 500 12px 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background .25s ease, color .25s ease;
+}
+
+.top-tabs button:hover { color: #fff; background: rgba(255, 255, 255, .07); }
+.top-tabs button[aria-selected="true"] { color: #fff; background: rgba(255, 255, 255, .13); }
+.statement, .manufacturing, .products, .region { scroll-margin-top: 98px; }
+.pillars h3 { margin: 18px 0 14px; }
+.process > div { display: block; padding: 28px 0; }
+.process b, .process small { display: block; }
+.process small { margin-top: 9px; }
+
+@media (max-width: 900px) {
+  .nav nav { top: 78px; background: rgba(3, 18, 29, .97); backdrop-filter: blur(18px); }
+  .top-tabs { width: 100%; display: grid; gap: 2px; border-radius: 12px; }
+  .top-tabs button { text-align: left; border-radius: 8px; padding: 13px 15px; }
+  .nav-cta { margin-top: 8px; }
+  .statement, .manufacturing, .products, .region { scroll-margin-top: 78px; }
+}
+
+/* The flagship pack leads the range; supporting photography stays secondary. */
+.products .section-head { margin-bottom: 48px; }
+.product-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+.hero-product {
+  grid-column: 1 / -1;
+  min-height: 570px;
+  padding: clamp(40px, 6vw, 88px);
+  background: linear-gradient(120deg, #eef7fa 0%, #fff 58%, #f5efe5 100%);
+  border: 1px solid rgba(0, 51, 160, .08);
+}
+.hero-product::before {
+  content: '';
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  right: 9%;
+  top: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(149, 217, 234, .3), rgba(149, 217, 234, 0) 70%);
+  transform: translateY(-50%);
+}
+.hero-product > div:first-child { max-width: 42%; justify-content: center; }
+.hero-product h3 { margin: 24px 0 18px; font-size: clamp(34px, 4vw, 58px); line-height: 1.04; }
+.hero-product .pack-art.product-photo {
+  content: url('assets/calm-tissue-premium-pure-quality-18-roll.jpeg');
+  right: 4%;
+  bottom: 2%;
+  width: 54%;
+  height: 96%;
+  max-width: 720px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  transform: none;
+  filter: drop-shadow(0 30px 32px rgba(20, 47, 70, .13));
+}
+.product-grid > .pack-card,
+.product-grid > .future { min-height: 370px; padding: 42px; }
+.pack-card .mini-pack { height: 180px; filter: drop-shadow(0 15px 18px rgba(20, 47, 70, .1)); }
+.product-detail { margin: 18px 0 0; font-size: 12px; color: #596c76; }
+.range-card { justify-content: center; background: #fff; }
+.range-card h3 { margin: 24px 0 16px; font-size: clamp(28px, 3vw, 42px); line-height: 1.08; }
+.size-line { display: flex; flex-wrap: wrap; gap: 10px; margin: 30px 0 12px; }
+.size-line b { display: grid; place-items: center; width: 52px; height: 52px; margin: 0; border: 1px solid rgba(0, 51, 160, .18); border-radius: 50%; color: #0033a0; font: 600 16px Manrope, sans-serif; }
+.range-card small { color: #79868c; text-transform: uppercase; letter-spacing: .12em; }
+.contact-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.contact-links a { display: inline-block; padding: 15px 19px; border: 1px solid rgba(255,255,255,.4); border-radius: 2px; color: #fff; font-size: 13px; font-weight: 600; }
+.contact-links a:last-child { background: #fff; color: #0033a0; border-color: #fff; }
+.quality-detail.text-only { display: block; min-height: 0; margin-top: 20px; background: linear-gradient(110deg, #e9f5f8, #f8fbfb); }
+.quality-detail.text-only > div { max-width: 850px; padding: clamp(48px, 7vw, 90px); }
+.map .botswana-shape { fill: #0e344a; stroke: #53c6ea; stroke-width: 2; }
+.map .spedu-zone { fill: rgba(149,217,234,.18); stroke: #95d9ea; stroke-width: 1.5; stroke-dasharray: 5 5; }
+.map .country-name { fill: rgba(255,255,255,.5); stroke: none; font: 600 13px Manrope, sans-serif; letter-spacing: .2em; }
+.map .town-point { fill: #c9a76a; stroke: #fff; stroke-width: 2; }
+.map .pulse { transform-box: fill-box; transform-origin: center; animation: mapPulse 2s infinite; }
+.map .town-label { top: 39%; left: 73%; color: #fff; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: none; white-space: nowrap; }
+.map .region-label { position: absolute; top: calc(39% + 24px); left: 73%; color: #c9a76a; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+@keyframes mapPulse { from { opacity: 1; transform: scale(.2); } to { opacity: 0; transform: scale(1.35); } }
+
+/* A brief, tactile brand opening shown once per browsing session. */
+body.intro-active { overflow: hidden; }
+.brand-intro { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; overflow: hidden; background: #061824; color: #fff; }
+.intro-glow { position: absolute; width: min(70vw, 760px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(149,217,234,.2), rgba(0,51,160,.08) 38%, transparent 70%); animation: introGlow 1.7s ease both; }
+.intro-mark { position: relative; z-index: 2; text-align: center; animation: introMark 1.35s cubic-bezier(.22,.72,.2,1) both; }
+.intro-mark img { display: block; width: clamp(180px, 20vw, 270px); height: auto; margin: 0 auto 22px; filter: drop-shadow(0 18px 30px rgba(0,0,0,.24)); }
+.intro-mark p { margin: 0; color: #bce8f4; font: 500 10px Manrope, sans-serif; letter-spacing: .3em; text-transform: uppercase; }
+.intro-curtain { position: absolute; top: 0; bottom: 0; width: 50.1%; z-index: 3; background: #061824; transform: scaleX(0); }
+.intro-curtain-left { left: 0; transform-origin: left; }
+.intro-curtain-right { right: 0; transform-origin: right; }
+.brand-intro.intro-finished { pointer-events: none; background: transparent; transition: background .15s ease .55s; }
+.brand-intro.intro-finished .intro-mark,.brand-intro.intro-finished .intro-glow { opacity: 0; transform: scale(1.03); transition: opacity .35s ease, transform .5s ease; }
+.brand-intro.intro-finished .intro-curtain-left { animation: curtainLeft .8s cubic-bezier(.65,0,.2,1) both; }
+.brand-intro.intro-finished .intro-curtain-right { animation: curtainRight .8s cubic-bezier(.65,0,.2,1) both; }
+@keyframes introMark { from { opacity: 0; transform: translateY(16px) scale(.97); filter: blur(5px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes introGlow { from { opacity: 0; transform: scale(.72); } to { opacity: 1; transform: scale(1); } }
+@keyframes curtainLeft { 0% { transform: scaleX(1); } 100% { transform: translateX(-100%); } }
+@keyframes curtainRight { 0% { transform: scaleX(1); } 100% { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .brand-intro { display: none; } }
+
+@media (max-width: 700px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .hero-product { min-height: 660px; padding: 38px 30px; }
+  .hero-product > div:first-child { max-width: 100%; height: auto; }
+  .hero-product .pack-art.product-photo { width: 92%; max-width: none; height: 52%; right: 4%; bottom: 0; }
+  .hero-product::before { width: 330px; height: 330px; right: -20%; top: 72%; }
+}

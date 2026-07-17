@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://calmtissue.com/sitemap.xml
