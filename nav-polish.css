@@ -120,6 +120,16 @@ body.intro-active { overflow: hidden; }
 @keyframes introGlow { from { opacity: 0; transform: scale(.72); } to { opacity: 1; transform: scale(1); } }
 @media (prefers-reduced-motion: reduce) { .brand-intro { display: none; } }
 
+/* Keep every served market visible; the row wraps gracefully instead of clipping. */
+.sectors .ticker { flex-wrap: wrap; white-space: normal; row-gap: 22px; }
+.sectors .ticker span { display: inline-flex; align-items: center; }
+.sectors .ticker span:last-child::after { display: none; }
+
+@media (max-width: 700px) {
+  .sectors .ticker { gap: 16px 24px; font-size: clamp(22px, 8vw, 34px); }
+  .sectors .ticker span::after { margin-left: 24px; }
+}
+
 @media (max-width: 700px) {
   .product-grid { grid-template-columns: 1fr; }
   .hero-product { min-height: 660px; padding: 38px 30px; }
