@@ -106,22 +106,18 @@
 
 /* A brief, tactile brand opening shown once per browsing session. */
 body.intro-active { overflow: hidden; }
-.brand-intro { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; overflow: hidden; background: #061824; color: #fff; }
+.brand-intro { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; overflow: hidden; background: #061824; color: #fff; opacity: 1; visibility: visible; will-change: opacity, visibility; }
 .intro-glow { position: absolute; width: min(70vw, 760px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(149,217,234,.2), rgba(0,51,160,.08) 38%, transparent 70%); animation: introGlow 1.7s ease both; }
 .intro-mark { position: relative; z-index: 2; text-align: center; animation: introMark 1.35s cubic-bezier(.22,.72,.2,1) both; }
 .intro-mark img { display: block; width: clamp(180px, 20vw, 270px); height: auto; margin: 0 auto 22px; filter: drop-shadow(0 18px 30px rgba(0,0,0,.24)); }
 .intro-mark p { margin: 0; color: #bce8f4; font: 500 10px Manrope, sans-serif; letter-spacing: .3em; text-transform: uppercase; }
-.intro-curtain { position: absolute; top: 0; bottom: 0; width: 50.1%; z-index: 3; background: #061824; transform: scaleX(0); }
+.intro-curtain { display: none; }
 .intro-curtain-left { left: 0; transform-origin: left; }
 .intro-curtain-right { right: 0; transform-origin: right; }
-.brand-intro.intro-finished { pointer-events: none; background: transparent; transition: background .15s ease .55s; }
-.brand-intro.intro-finished .intro-mark,.brand-intro.intro-finished .intro-glow { opacity: 0; transform: scale(1.03); transition: opacity .35s ease, transform .5s ease; }
-.brand-intro.intro-finished .intro-curtain-left { animation: curtainLeft .8s cubic-bezier(.65,0,.2,1) both; }
-.brand-intro.intro-finished .intro-curtain-right { animation: curtainRight .8s cubic-bezier(.65,0,.2,1) both; }
+.brand-intro.intro-finished { pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .72s cubic-bezier(.4,0,.2,1), visibility 0s linear .72s; }
+.brand-intro.intro-finished .intro-mark,.brand-intro.intro-finished .intro-glow { opacity: 0; transform: translateY(-5px) scale(1.025); transition: opacity .38s ease, transform .62s cubic-bezier(.4,0,.2,1); }
 @keyframes introMark { from { opacity: 0; transform: translateY(16px) scale(.97); filter: blur(5px); } to { opacity: 1; transform: none; filter: none; } }
 @keyframes introGlow { from { opacity: 0; transform: scale(.72); } to { opacity: 1; transform: scale(1); } }
-@keyframes curtainLeft { 0% { transform: scaleX(1); } 100% { transform: translateX(-100%); } }
-@keyframes curtainRight { 0% { transform: scaleX(1); } 100% { transform: translateX(100%); } }
 @media (prefers-reduced-motion: reduce) { .brand-intro { display: none; } }
 
 @media (max-width: 700px) {

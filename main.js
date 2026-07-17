@@ -13,7 +13,7 @@ if (brandIntro) {
     window.setTimeout(() => {
       brandIntro.classList.add('intro-finished');
       document.body.classList.remove('intro-active');
-      window.setTimeout(() => brandIntro.remove(), 900);
+      window.setTimeout(() => brandIntro.remove(), 760);
     }, 1750);
   }
 }
