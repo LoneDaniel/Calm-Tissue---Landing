@@ -6,7 +6,7 @@ The navigation and footer use the supplied Calm Tissue logo artwork without alte
 
 ## Company journey
 
-Calm Tissue was founded in South Africa by a Motswana in 2024, traded through channels including SPAR, Makro Online, Uber Eats and other chain stores, and opened its Botswana plant in Selibe Phikwe in 2025. Retailer references describe historical sales channels and must not be presented as endorsements.
+Calm Tissue was founded in South Africa by a Motswana in 2024, traded through channels including SPAR, Makro Online, Uber Eats and other chain stores, and opened its Botswana factory in Selibe Phikwe in 2025. Retailer references describe historical sales channels and must not be presented as endorsements.
 
 ## Preview
 
