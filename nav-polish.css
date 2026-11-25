@@ -180,3 +180,18 @@ body.intro-active { overflow: hidden; }
 .stockist-logos a:hover{border-color:#0033a0}
 .stockist-logos img{display:block;max-width:100%;max-height:72px;object-fit:contain}
 @media(max-width:900px){.stockists{padding:70px 5vw}.stockist-logos{grid-template-columns:repeat(2,1fr)}}
+
+/* Hero: "Morning at home" banner (desktop 16:9, dedicated 4:5 mobile image) */
+.hero-media{background:#30364a url('assets/calm-hero-home-1920.webp') right center/cover no-repeat}
+.hero-shade{background:linear-gradient(90deg,rgba(22,28,48,.72) 0%,rgba(22,28,48,.5) 32%,rgba(22,28,48,0) 50%),linear-gradient(0deg,rgba(22,28,48,.5),rgba(22,28,48,0) 24%)}
+@media(min-width:901px){.hero-copy{max-width:min(850px,42vw);box-sizing:content-box}.hero h1{font-size:clamp(44px,5vw,88px)}.hero-copy>p:not(.eyebrow){max-width:100%}}
+@media(max-width:1280px) and (min-width:901px){.hero-media{background-image:url('assets/calm-hero-home-1280.webp')}}
+@media(max-width:900px){
+.hero{height:auto;min-height:calc(83vw + 470px);background:#2a3147}
+.hero-media{background:#2a3147 url('assets/calm-hero-home-mobile.webp') center top/100% auto no-repeat}
+.hero-shade{background:linear-gradient(0deg,#2a3147 0%,rgba(42,49,71,.85) calc(100% - 83vw),rgba(42,49,71,0) calc(100% - 70vw))}
+.hero-copy{position:absolute;left:0;right:0;bottom:44px;padding:0 6vw;max-width:none}
+.hero-foot{display:none}
+}
+@media(min-width:901px) and (max-width:1180px){.hero-copy{max-width:36vw}}
+.hero .actions .button{white-space:nowrap}
