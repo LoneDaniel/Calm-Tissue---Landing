@@ -27,7 +27,7 @@ menu.addEventListener('click', () => {
 const tabGroups = {
   company: ['.statement', '.homecoming'],
   manufacturing: ['.manufacturing'],
-  products: ['.products'],
+  products: ['.products', '.stockists'],
   impact: ['.region', '.endorsements', '.sectors', '.vision'],
   contact: ['.contact']
 };
@@ -64,7 +64,7 @@ function tabForHash(hash) {
   if (managedSections[id]) return id;
   if (id === 'company') return 'company';
   if (id === 'manufacturing') return 'manufacturing';
-  if (id === 'products') return 'products';
+  if (['products', 'stockists', 'stockists-title'].includes(id)) return 'products';
   if (['impact', 'endorsement-title'].includes(id)) return 'impact';
   if (id === 'contact') return 'contact';
   return null;
