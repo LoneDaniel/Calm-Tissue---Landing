@@ -195,3 +195,4 @@ body.intro-active { overflow: hidden; }
 }
 @media(min-width:901px) and (max-width:1180px){.hero-copy{max-width:36vw}}
 .hero .actions .button{white-space:nowrap}
+.profile-download{margin-top:30px;color:#fff;border:1px solid #ffffffb3;transition:background .2s,color .2s}.profile-download:hover{background:#fff;color:#0033a0}.profile-download span{font-weight:400;opacity:.8}
