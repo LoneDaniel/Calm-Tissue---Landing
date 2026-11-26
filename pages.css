@@ -111,3 +111,5 @@ footer small { text-align: center; }
 .award-copy h2 { font: 500 clamp(34px, 4vw, 56px)/1.05 Manrope, sans-serif; letter-spacing: -.045em; margin: 0 0 18px; }
 .award-copy p:not(.eyebrow) { color: var(--muted); line-height: 1.7; max-width: 560px; }
 @media (max-width: 900px) { .award { grid-template-columns: 1fr; padding: 70px 5vw; } }
+
+.endorsements .endorsement-logos .lea-logo img { width: 220px; max-width: 100%; max-height: 100px; object-fit: contain; }
