@@ -149,5 +149,6 @@ document.querySelectorAll('.reveal').forEach(element => observer.observe(element
     else if (/^mailto:/i.test(href)) send('email_click', p);
     else if (/company-profile[^/]*\.pdf$/i.test(href)) send('profile_download', p);
   }, true);
-  document.querySelectorAll('form[action]').forEach(f => f.addEventListener('submit', () => send('generate_lead', { form_name: 'contact_form' })));
+  document.querySelectorAll('form[action]').forEach(f => f.addEventListener('submit', () => send('form_submit', { form_name: 'contact_form' })));
+  if (document.body.dataset.leadPage === 'contact_form') send('generate_lead', { form_name: 'contact_form' });
 })();
