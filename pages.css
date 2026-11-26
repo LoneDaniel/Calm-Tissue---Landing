@@ -113,3 +113,4 @@ footer small { text-align: center; }
 @media (max-width: 900px) { .award { grid-template-columns: 1fr; padding: 70px 5vw; } }
 
 .endorsements .endorsement-logos .lea-logo img { width: 220px; max-width: 100%; max-height: 100px; object-fit: contain; }
+.endorsements .endorsement-logos .spedu-on-dark img { width: 200px; max-width: 100%; max-height: 100px; object-fit: contain; }
