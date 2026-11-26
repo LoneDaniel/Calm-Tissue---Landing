@@ -201,3 +201,21 @@ document.querySelectorAll('.reveal').forEach(element => observer.observe(element
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menuBox.hidden) { close(); btn.focus(); } });
   render();
 })();
+
+/* Enquiry tracking: sends a GA4 event when someone taps WhatsApp, phone or email, downloads the company profile
+   or sends the contact form. Only the type of action and where it was clicked are sent - never names, numbers or message text. */
+(() => {
+  const send = (name, params) => { if (typeof window.gtag === 'function') window.gtag('event', name, Object.assign({ transport_type: 'beacon' }, params)); };
+  const where = el => { const s = el.closest('header, footer, section, aside, form'); return s ? (s.id || s.className.split(' ')[0] || s.tagName.toLowerCase()) : 'page'; };
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    const p = { link_location: where(a) };
+    if (/^https:\/\/wa\.me\//i.test(href)) send('whatsapp_click', p);
+    else if (/^tel:/i.test(href)) send('phone_click', p);
+    else if (/^mailto:/i.test(href)) send('email_click', p);
+    else if (/company-profile[^/]*\.pdf$/i.test(href)) send('profile_download', p);
+  }, true);
+  document.querySelectorAll('form[action]').forEach(f => f.addEventListener('submit', () => send('generate_lead', { form_name: 'contact_form' })));
+})();
