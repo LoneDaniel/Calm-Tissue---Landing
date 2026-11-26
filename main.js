@@ -151,3 +151,11 @@ document.querySelectorAll('.reveal').forEach(element => observer.observe(element
   }, true);
   document.querySelectorAll('form[action]').forEach(f => f.addEventListener('submit', () => send('generate_lead', { form_name: 'contact_form' })));
 })();
+
+/* Keep the footer year current (static year stays as fallback) */
+(() => {
+  const now = new Date().getFullYear();
+  document.querySelectorAll('footer').forEach(f => {
+    f.innerHTML = f.innerHTML.replace(/© \d{4} Calm Tissue/, '© ' + now + ' Calm Tissue');
+  });
+})();
