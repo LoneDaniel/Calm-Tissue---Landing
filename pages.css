@@ -94,3 +94,5 @@
 footer small { color: #8696a0; }
 .journey span, .retailer-note { color: #5e6a70; }
 .vision .eyebrow { color: #065f7e; }
+
+.nav-cta[aria-current="page"] { background: rgba(255, 255, 255, .13); border-color: #fff; }
