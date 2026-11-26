@@ -140,8 +140,12 @@ document.querySelectorAll('.reveal').forEach(element => observer.observe(element
   function detect() {
     let tz = '';
     try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+    const langs = navigator.languages || [navigator.language || ''];
+    // Gaborone and Johannesburg share a time zone, and many Botswana devices report Johannesburg.
+    // Show South Africa only with a South African language hint; otherwise default to Botswana (home market).
+    if (tz === 'Africa/Johannesburg') return langs.some(l => /-ZA$|^(af|zu|xh|nso|st|ts|ve|nr|ss)(-|$)/i.test(l)) ? 'ZA' : 'BW';
     if (TZ[tz]) return TZ[tz];
-    for (const l of (navigator.languages || [navigator.language || ''])) {
+    for (const l of langs) {
       const m = /[-_]([A-Za-z]{2})$/.exec(l);
       if (m) return m[1].toUpperCase();
     }
