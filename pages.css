@@ -29,7 +29,7 @@
 
 /* Home: three routes */
 .explore { background: #fff; }
-.explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.explore-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .explore-card { display: flex; flex-direction: column; padding: 36px; border: 1px solid #dfe6ea; border-radius: 4px; background: #f7fafb; transition: transform .25s ease, border-color .25s ease; }
 .explore-card:hover { transform: translateY(-4px); border-color: #0033a0; }
 .explore-card h3 { font: 600 24px/1.2 Manrope, sans-serif; margin: 14px 0 10px; }
