@@ -145,3 +145,16 @@ footer small { text-align: center; }
     radial-gradient(34% 4.5% at 50% 83%, rgba(175, 215, 255, .6), rgba(175, 215, 255, 0) 100%);
   filter: blur(10px); }
 @media (max-width: 900px) { .award-media::after { inset: -35% -18% -22%; } }
+
+/* Scroll cue: gentle bob */
+.hero-foot span { display: inline-flex; align-items: center; gap: 10px; }
+.hero-foot span::after { content: ''; width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); animation: scrollCue 1.8s ease-in-out infinite; }
+@keyframes scrollCue { 0%, 100% { transform: translateY(-2px) rotate(45deg); opacity: .55; } 50% { transform: translateY(4px) rotate(45deg); opacity: 1; } }
+
+/* About: journey line as a stamp seal, in the packaging's satin gold */
+.story-seal { margin: 0; justify-self: end; width: clamp(160px, 14vw, 200px); margin-right: 2vw; transform: rotate(-8deg); filter: drop-shadow(0 14px 22px rgba(120, 90, 50, .25)); }
+.story-seal svg { display: block; width: 100%; height: auto; }
+.seal-ring-text { font: 700 14.5px Manrope, sans-serif; fill: #0033a0; letter-spacing: .08em; }
+.seal-small { font: 700 11px Manrope, sans-serif; fill: #0033a0; letter-spacing: .22em; }
+@media (prefers-reduced-motion: no-preference) { .story-seal { transition: transform .6s ease; } .story-seal:hover { transform: rotate(-2deg) scale(1.03); } }
+@media (max-width: 900px) { .story-seal { justify-self: start; width: 150px; margin-top: 30px; } }
