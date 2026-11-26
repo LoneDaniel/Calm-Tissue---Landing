@@ -136,3 +136,12 @@ footer small { text-align: center; }
 .award-fair-logo { display:inline-flex; align-items:center; justify-content:center; background:#fff; border-radius:14px; padding:10px 12px; margin-bottom:18px; box-shadow:0 0 0 1px rgba(226,196,143,.55), 0 8px 24px rgba(0,0,0,.25); }
 .award-fair-logo img { display:block; width:92px; height:auto; }
 @media (max-width:640px){ .award-fair-logo img { width:76px; } }
+
+/* Spotlight glow behind the award graphic */
+.award-media { isolation: isolate; }
+.award-media::after { content: ''; position: absolute; z-index: -1; inset: -55% -50% -30%; pointer-events: none;
+  background:
+    radial-gradient(42% 40% at 58% 44%, rgba(120, 185, 255, .75), rgba(60, 135, 245, .38) 50%, rgba(30, 90, 220, 0) 100%),
+    radial-gradient(34% 4.5% at 50% 83%, rgba(175, 215, 255, .6), rgba(175, 215, 255, 0) 100%);
+  filter: blur(10px); }
+@media (max-width: 900px) { .award-media::after { inset: -35% -18% -22%; } }
