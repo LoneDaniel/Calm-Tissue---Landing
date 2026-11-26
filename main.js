@@ -24,87 +24,19 @@ menu.addEventListener('click', () => {
   menu.textContent = open ? 'Close' : 'Menu';
 });
 
-const tabGroups = {
-  company: ['.statement', '.homecoming'],
-  manufacturing: ['.manufacturing'],
-  products: ['.products', '.stockists'],
-  impact: ['.region', '.endorsements', '.sectors', '.vision'],
-  contact: ['.contact']
-};
-
-const tabButtons = [...document.querySelectorAll('[data-tab]')];
-const managedSections = Object.fromEntries(
-  Object.entries(tabGroups).map(([key, selectors]) => [
-    key,
-    selectors.flatMap(selector => [...document.querySelectorAll(selector)])
-  ])
-);
-
-Object.values(managedSections).flat().forEach(section => section.classList.add('tab-managed'));
-
-function activateTab(name, options = {}) {
-  if (!managedSections[name]) name = 'company';
-
-  Object.entries(managedSections).forEach(([key, sections]) => {
-    sections.forEach(section => { section.hidden = key !== name; });
-  });
-
-  tabButtons.forEach(button => {
-    const active = button.dataset.tab === name;
-    button.setAttribute('aria-selected', active);
-    button.tabIndex = active ? 0 : -1;
-  });
-
-  if (options.updateHash) history.replaceState(null, '', `#${name}`);
-  if (options.scroll) managedSections[name][0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+/* Multi-page site: links people already have to the old one-page tabs (e.g. calmtissue.com/#products) go to the matching page. */
+const oldAnchors = { manufacturing: '/about#quality', products: '/products', stockists: '/where-to-buy', 'stockists-title': '/where-to-buy', impact: '/botswana', 'endorsement-title': '/botswana', contact: '/contact' };
+if (document.body.classList.contains('home') && location.hash) {
+  const target = oldAnchors[location.hash.slice(1)];
+  if (target) location.replace(target);
 }
 
-function tabForHash(hash) {
-  const id = hash.replace('#', '');
-  if (managedSections[id]) return id;
-  if (id === 'company') return 'company';
-  if (id === 'manufacturing') return 'manufacturing';
-  if (['products', 'stockists', 'stockists-title'].includes(id)) return 'products';
-  if (['impact', 'endorsement-title'].includes(id)) return 'impact';
-  if (id === 'contact') return 'contact';
-  return null;
-}
-
-tabButtons.forEach((button, index) => {
-  button.addEventListener('click', () => {
-    activateTab(button.dataset.tab, { updateHash: true, scroll: true });
-    header.classList.remove('open');
-    menu.setAttribute('aria-expanded', 'false');
-    menu.textContent = 'Menu';
-  });
-  button.addEventListener('keydown', event => {
-    if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
-    event.preventDefault();
-    const direction = event.key === 'ArrowRight' ? 1 : -1;
-    const next = tabButtons[(index + direction + tabButtons.length) % tabButtons.length];
-    next.focus();
-    activateTab(next.dataset.tab, { updateHash: true });
-  });
-});
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', event => {
-    const targetTab = tabForHash(link.getAttribute('href'));
-    if (!targetTab) return;
-    event.preventDefault();
-    activateTab(targetTab, { updateHash: true, scroll: true });
-    header.classList.remove('open');
-    menu.setAttribute('aria-expanded', 'false');
-    menu.textContent = 'Menu';
-  });
-});
-
-// Prevent the browser from jumping into a section before the tab layout is ready.
-const initialTab = tabForHash(location.hash) || 'company';
-activateTab(initialTab);
-if (location.hash && initialTab !== 'company') {
-  requestAnimationFrame(() => managedSections[initialTab][0].scrollIntoView({ block: 'start' }));
-}
+// Close the mobile menu after choosing a page
+document.querySelectorAll('.nav nav a').forEach(link => link.addEventListener('click', () => {
+  header.classList.remove('open');
+  menu.setAttribute('aria-expanded', 'false');
+  menu.textContent = 'Menu';
+}));
 
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {
   if (entry.isIntersecting) {
