@@ -153,8 +153,27 @@ footer small { text-align: center; }
 
 /* About: journey line as a stamp seal, in the packaging's satin gold */
 .story-seal { margin: 0; justify-self: end; width: clamp(160px, 14vw, 200px); margin-right: 2vw; transform: rotate(-8deg); filter: drop-shadow(0 14px 22px rgba(120, 90, 50, .25)); }
-.story-seal svg { display: block; width: 100%; height: auto; }
+.story-seal svg { display: block; width: 100%; height: auto; overflow: visible; }
 .seal-ring-text { font: 700 14.5px Manrope, sans-serif; fill: #0033a0; letter-spacing: .08em; }
 .seal-small { font: 700 11px Manrope, sans-serif; fill: #0033a0; letter-spacing: .22em; }
 @media (prefers-reduced-motion: no-preference) { .story-seal { transition: transform .6s ease; } .story-seal:hover { transform: rotate(-2deg) scale(1.03); } }
 @media (max-width: 900px) { .story-seal { justify-self: start; width: 150px; margin-top: 30px; } }
+
+/* LEA interview link (award section) */
+.award-video { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; color: #e2c48f; font-size: 15px; font-weight: 600; border-bottom: 1px solid rgba(226, 196, 143, .45); padding-bottom: 6px; transition: color .2s, border-color .2s; }
+.award-video svg { width: 22px; height: 22px; flex: none; }
+.award-video:hover, .award-video:focus-visible { color: #fff; border-color: #fff; }
+
+/* Seal motion: slow-turning rim text and a passing sheen */
+.seal-spin { transform-box: view-box; transform-origin: 150px 150px; animation: sealSpin 40s linear infinite; }
+.seal-sheen { animation: sealSheen 6s ease-in-out infinite; }
+@keyframes sealSpin { to { transform: rotate(360deg); } }
+@keyframes sealSheen { 0%, 55% { transform: rotate(20deg) translateX(0); transform-origin: 150px 150px; } 90%, 100% { transform: rotate(20deg) translateX(540px); transform-origin: 150px 150px; } }
+.seal-sheen { transform-box: view-box; transform-origin: 150px 150px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Seal ribbon tails: gentle flutter, as if caught by a breeze */
+.seal-tail { transform-box: view-box; animation: tailFlutter 3.2s ease-in-out infinite; }
+.seal-tail-l { transform-origin: 127px 256px; }
+.seal-tail-r { transform-origin: 173px 256px; animation-delay: -1.6s; }
+@keyframes tailFlutter { 0%, 100% { transform: scaleY(1) skewX(0deg); } 50% { transform: scaleY(1.1) skewX(-3deg); } }
