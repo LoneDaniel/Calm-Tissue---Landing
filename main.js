@@ -123,11 +123,9 @@ document.querySelectorAll('.reveal').forEach(element => observer.observe(element
   const btn = wrap.querySelector('.ct-region-btn');
   const menuBox = wrap.querySelector('.ct-region-menu');
   const optionsBox = wrap.querySelector('.ct-region-options');
-  const FLAGS = {
-    BW: '<svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#75AADB"/><rect y="5.33" width="24" height="5.33" fill="#fff"/><rect y="6" width="24" height="4" fill="#000"/></svg>',
-    ZA: '<svg viewBox="0 0 9 6"><rect width="9" height="3" fill="#E03C31"/><rect y="3" width="9" height="3" fill="#001489"/><path d="M0 0 4.5 3 0 6M4.5 3H9" stroke="#fff" stroke-width="2" fill="none"/><path d="M0 0 4.5 3 0 6M4.5 3H9" stroke="#007749" stroke-width="1.2" fill="none"/><path d="M0 .9 3.15 3 0 5.1z" fill="#FFB81C"/><path d="M0 1.35 2.5 3 0 4.65z" fill="#000"/></svg>',
-    GLOBE: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>'
-  };
+  const GLOBE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>';
+  const FLAG_FILES = 'bw,za,zw,na,zm,ls,sz,mz,ao,mw,tz,cd,mg,mu,sc,km,gb,us,ca,au,nz,ie,nl,de,fr,be,pt,es,it,ch,se,no,dk,cn,in,ae,sa,ng,ke,gh,eg,jp,sg,br'.split(',');
+  const NEIGHBOURS = ['ZW', 'NA', 'ZM', 'LS', 'SZ', 'MZ'];
   const TZ = {'Africa/Gaborone':'BW','Africa/Johannesburg':'ZA','Africa/Harare':'ZW','Africa/Windhoek':'NA','Africa/Lusaka':'ZM','Africa/Maputo':'MZ','Africa/Maseru':'LS','Africa/Mbabane':'SZ','Africa/Lagos':'NG','Africa/Nairobi':'KE','Africa/Accra':'GH','Europe/London':'GB','Europe/Dublin':'IE','Europe/Amsterdam':'NL','Europe/Berlin':'DE','Europe/Paris':'FR','Europe/Brussels':'BE','Europe/Lisbon':'PT','Europe/Madrid':'ES','Europe/Rome':'IT','America/New_York':'US','America/Chicago':'US','America/Denver':'US','America/Los_Angeles':'US','America/Toronto':'CA','Asia/Dubai':'AE','Asia/Shanghai':'CN','Asia/Kolkata':'IN','Asia/Singapore':'SG','Australia/Sydney':'AU'};
   const store = { get: () => { try { return localStorage.getItem('calmCountry'); } catch (e) { return null; } },
                   set: v => { try { localStorage.setItem('calmCountry', v); } catch (e) {} } };
@@ -135,7 +133,13 @@ document.querySelectorAll('.reveal').forEach(element => observer.observe(element
   const nameOf = c => (names && names.of(c)) || c;
   const isWindows = /Windows/i.test(navigator.userAgent);
   const emoji = c => String.fromCodePoint(...[...c].map(ch => 127397 + ch.charCodeAt(0)));
-  const flagHtml = c => FLAGS[c] || (isWindows || !/^[A-Z]{2}$/.test(c) ? FLAGS.GLOBE : `<span class="ct-emoji">${emoji(c)}</span>`);
+  const flagHtml = c => {
+    if (c === 'INT') return GLOBE;
+    const f = c.toLowerCase();
+    if (FLAG_FILES.includes(f)) return `<img src="assets/flags/${f}.svg" alt="" width="20" height="15" loading="lazy">`;
+    return isWindows || !/^[A-Z]{2}$/.test(c) ? GLOBE : `<span class="ct-emoji">${emoji(c)}</span>`;
+  };
+  const label = c => c === 'INT' ? 'Other countries' : nameOf(c);
 
   function detect() {
     let tz = '';
@@ -156,24 +160,33 @@ document.querySelectorAll('.reveal').forEach(element => observer.observe(element
   let current = store.get() || detected;
 
   function render() {
-    const name = nameOf(current);
+    const name = label(current);
     btn.querySelector('.ct-flag').innerHTML = flagHtml(current);
     btn.querySelector('.ct-region-name').textContent = name;
     btn.setAttribute('aria-label', `Your country: ${name}. Change country`);
     document.documentElement.dataset.country = current;
-    const list = ['BW', 'ZA'];
-    if (!list.includes(detected)) list.push(detected);
-    if (!list.includes(current)) list.push(current);
+    const groups = [['BW', 'ZA'], NEIGHBOURS.slice(), []];
+    const known = groups.flat();
+    if (!known.includes(detected)) groups[2].push(detected);
+    if (!known.includes(current) && current !== 'INT' && current !== detected) groups[2].push(current);
+    groups[2].push('INT');
+    const heads = ['Where Calm is sold', 'Southern Africa', 'Elsewhere'];
     optionsBox.innerHTML = '';
-    list.forEach(c => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'ct-region-option';
-      b.setAttribute('aria-pressed', c === current);
-      b.innerHTML = `<span class="ct-flag" aria-hidden="true">${flagHtml(c)}</span><span></span>`;
-      b.lastChild.textContent = nameOf(c);
-      b.addEventListener('click', () => { current = c; store.set(c); render(); close(); btn.focus(); });
-      optionsBox.appendChild(b);
+    groups.forEach((list, gi) => {
+      const h = document.createElement('p');
+      h.className = 'ct-region-group';
+      h.textContent = heads[gi];
+      optionsBox.appendChild(h);
+      list.forEach(c => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'ct-region-option';
+        b.setAttribute('aria-pressed', c === current);
+        b.innerHTML = `<span class="ct-flag" aria-hidden="true">${flagHtml(c)}</span><span></span>`;
+        b.lastChild.textContent = label(c);
+        b.addEventListener('click', () => { current = c; store.set(c); render(); close(); btn.focus(); });
+        optionsBox.appendChild(b);
+      });
     });
   }
   const close = () => { menuBox.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
@@ -182,7 +195,7 @@ document.querySelectorAll('.reveal').forEach(element => observer.observe(element
     const open = menuBox.hidden;
     menuBox.hidden = !open;
     btn.setAttribute('aria-expanded', String(open));
-    if (open) { const first = optionsBox.querySelector('[aria-pressed="true"]') || optionsBox.firstChild; first && first.focus(); }
+    if (open) { const first = optionsBox.querySelector('[aria-pressed="true"]') || optionsBox.querySelector('button'); first && first.focus(); }
   });
   document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menuBox.hidden) { close(); btn.focus(); } });
