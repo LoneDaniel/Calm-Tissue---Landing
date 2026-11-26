@@ -177,3 +177,7 @@ footer small { text-align: center; }
 .seal-tail-l { transform-origin: 127px 256px; }
 .seal-tail-r { transform-origin: 173px 256px; animation-delay: -1.6s; }
 @keyframes tailFlutter { 0%, 100% { transform: scaleY(1) skewX(0deg); } 50% { transform: scaleY(1.1) skewX(-3deg); } }
+
+/* Whole seal: gentle breathing pulse, in rhythm with the tails */
+.story-seal svg { transform-origin: 50% 42%; animation: sealBreathe 3.2s ease-in-out infinite; }
+@keyframes sealBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.045); } }
